@@ -56,4 +56,22 @@ public class UserManager {
             e.printStackTrace();
         }
     }
+    
+    // method to delete a user from the database
+    public void deleteUser(String username) {
+        try {
+            String query = "DELETE FROM User WHERE username = ?";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1, username);
+            int rowsAffected = statement.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("User deleted successfully.");
+            } else {
+                System.out.println("User not found.");
+            }
+        } catch (SQLException e) {
+            System.out.println("Failed to delete user.");
+            e.printStackTrace();
+        }
+    }
 }
