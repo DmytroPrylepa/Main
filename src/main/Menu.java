@@ -76,4 +76,61 @@ public class Menu {
             }
         }
     }
+    
+    // method to handle user login
+    private String loginUser() {
+        System.out.print("Enter username: ");
+        String username = scanner.next();
+        System.out.print("Enter password: ");
+        String password = scanner.next();
+
+        if (accessControl.authenticateUser(username, password)) {
+            System.out.println("Login successful.");
+            return username;
+        } else {
+            System.out.println("Invalid username or password.");
+            return null;
+        }
+    }
+	
+	// method to handle report generation based on user permissions
+    private void generateReports(String username) {
+        if (accessControl.canGenerateReport(username)) {
+            System.out.println("=== Generate Reports ===");
+            System.out.println("1. Course Report");
+            System.out.println("2. Student Report");
+            System.out.println("3. Lecturer Report");
+            System.out.print("Enter your choice: ");
+            int choice = scanner.nextInt();
+
+            switch (choice) {	
+                case 1:
+                    System.out.print("Enter report format (txt/csv/console): ");
+                    String courseFormat = scanner.next();
+                    CourseReport courseReport = new CourseReport(userManager.getConnection());
+                    courseReport.generateReport(courseFormat);
+                    break;
+                case 2:
+                    System.out.print("Enter report format (txt/csv/console): ");
+                    String studentFormat = scanner.next();
+                    StudentReport studentReport = new StudentReport(userManager.getConnection());
+                    studentReport.generateReport(studentFormat);
+                    break;
+                case 3:
+                    if (accessControl.canGenerateLecturerReport(username)) {
+                        System.out.print("Enter report format (txt/csv/console): ");
+                        String lecturerFormat = scanner.next();
+                        LecturerReport lecturerReport = new LecturerReport(userManager.getConnection());
+                        lecturerReport.generateReport(lecturerFormat, username);
+                    } else {
+                        System.out.println("You don't have permission to generate lecturer reports.");
+                    }
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please try again.");
+            }
+        } else {
+            System.out.println("You don't have permission to generate reports.");
+        }
+    }
 }
