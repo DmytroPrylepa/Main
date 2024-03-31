@@ -76,4 +76,44 @@ public class CourseReport {
             e.printStackTrace();
         }
     }
+    // method to generate the course report in CSV format
+    private void generateCsvReport(ResultSet resultSet) throws SQLException {
+        try (FileWriter writer = new FileWriter("course_report.csv")) {
+            writer.write("Course,Programme,Enrolled Students,Lecturer,Room\n");
+            while (resultSet.next()) {
+                String courseName = resultSet.getString("course_name");
+                String programme = resultSet.getString("programme");
+                int enrolledStudents = resultSet.getInt("enrolled_students");
+                String lecturer = resultSet.getString("lecturer");
+                String room = resultSet.getString("room");
+
+                writer.write(courseName + "," + programme + "," + enrolledStudents + "," +
+                             lecturer + "," + room + "\n");
+            }
+            System.out.println("Course report generated successfully (course_report.csv).");
+        } catch (IOException e) {
+            System.out.println("Failed to generate CSV report.");
+            e.printStackTrace();
+        }
+    }
+
+	// method to generate the course report and display it in the console
+    private void generateConsoleReport(ResultSet resultSet) throws SQLException {
+        System.out.println("Course Report:");
+        System.out.println("------------------------");
+        while (resultSet.next()) {
+            String courseName = resultSet.getString("course_name");
+            String programme = resultSet.getString("programme");
+            int enrolledStudents = resultSet.getInt("enrolled_students");
+            String lecturer = resultSet.getString("lecturer");
+            String room = resultSet.getString("room");
+
+            System.out.println("Course: " + courseName);
+            System.out.println("Programme: " + programme);
+            System.out.println("Enrolled Students: " + enrolledStudents);
+            System.out.println("Lecturer: " + lecturer);
+            System.out.println("Room: " + room);
+            System.out.println("------------------------");
+        }
+    }
 }
