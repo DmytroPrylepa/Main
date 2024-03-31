@@ -48,12 +48,12 @@ public class DBConnection {
 // method to close the database connection
     public void closeConnection() {
         try {
-			// check if the connection is not null and not already closed
-            if (connection != null && !connection.isClosed()) {
-				// close the database connection
-                connection.close();
-                System.out.println("Disconnected from the database.");
-            }
+	// check if the connection is not null and not already closed
+        if (connection != null && !connection.isClosed()) {
+	// close the database connection
+        connection.close();
+        System.out.println("Disconnected from the database.");
+        }
         } catch (SQLException e) {
 			// handle the exception if there is an error closing the connection
             System.out.println("Failed to close the database connection.");
