@@ -133,4 +133,58 @@ public class Menu {
             System.out.println("You don't have permission to generate reports.");
         }
     }
+    
+    // method to handle user management based on user permissions
+    private void manageUsers(String username) {
+        if (accessControl.canManageUsers(username)) {
+            System.out.println("=== Manage Users ===");
+            System.out.println("1. Add User");
+            System.out.println("2. Update User");
+            System.out.println("3. Delete User");
+            System.out.print("Enter your choice: ");
+            int choice = scanner.nextInt();
+
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter username: ");
+                    String newUsername = scanner.next();
+                    System.out.print("Enter password: ");
+                    String newPassword = scanner.next();
+                    System.out.print("Enter role (admin/office/lecturer): ");
+                    String newRole = scanner.next();
+                    userManager.addUser(newUsername, newPassword, newRole);
+                    break;
+                case 2:
+                    System.out.print("Enter username: ");
+                    String updateUsername = scanner.next();
+                    System.out.print("Enter new password: ");
+                    String updatePassword = scanner.next();
+                    System.out.print("Enter new role (admin/office/lecturer): ");
+                    String updateRole = scanner.next();
+                    userManager.updateUser(updateUsername, updatePassword, updateRole);
+                    break;
+                case 3:
+                    System.out.print("Enter username: ");
+                    String deleteUsername = scanner.next();
+                    userManager.deleteUser(deleteUsername);
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please try again.");
+            }
+        } else {
+            System.out.println("You don't have permission to manage users.");
+        }
+    }
+	
+	// method to handle password change for the logged-in user
+    private void changePassword(String username) {
+        if (accessControl.canModifyOwnDetails(username)) {
+            System.out.print("Enter new password: ");
+            String newPassword = scanner.next();
+            userManager.changePassword(username, newPassword);
+        } else {
+            System.out.println("You don't have permission to change your password.");
+        }
+    
+ }
 }
