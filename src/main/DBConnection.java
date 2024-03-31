@@ -4,13 +4,19 @@
  */
 package main;
 
-private static final String URL = "jdbc:mysql://localhost:3306/cms_db";
-private static final String USERNAME = "your_username";
-private static final String PASSWORD = "your_password";
-
-private Connection connection;
-
 public class DBConnection {
+    // URL for the MySQL database connection
+    private static final String URL = "jdbc:mysql://localhost:3306/cms";
+    
+    // Username for the MySQL database connection
+    private static final String USERNAME = "admin";
+    
+    // Password for the MySQL database connection
+    private static final String PASSWORD = "java";
+    
+    // Connection object to hold the database connection
+    
+    private Connection connection;
     try {
     /* load the MySQL JDBC driver
     this is necessary to establish a connection to the MySQL database */
