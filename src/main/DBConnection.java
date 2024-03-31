@@ -4,6 +4,10 @@
  */
 package main;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
 public class DBConnection {
     // URL for the MySQL database connection
     private static final String URL = "jdbc:mysql://localhost:3306/cms";
@@ -15,7 +19,6 @@ public class DBConnection {
     private static final String PASSWORD = "java";
     
     // Connection object to hold the database connection
-    
     private Connection connection;
     try {
     /* load the MySQL JDBC driver

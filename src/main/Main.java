@@ -14,7 +14,10 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+         // Create an instance of DBConnection
+        // Create instances of UserManager and AccessControl
+        // Display menu system and handle user interactions
+        // Call report generation methods based on user choices
     }
     
 }
